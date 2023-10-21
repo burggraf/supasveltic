@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { IonPage } from "ionic-svelte"
-
+    import { IonPage } from "ionic-svelte"
 
 </script>
 <IonPage>
     <ion-header>
         <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-menu-button />
+            </ion-buttons>
             <ion-title>About</ion-title>
         </ion-toolbar>
     </ion-header>

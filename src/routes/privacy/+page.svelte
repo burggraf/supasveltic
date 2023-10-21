@@ -6,6 +6,9 @@
 <IonPage>
     <ion-header>
         <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-menu-button />
+            </ion-buttons>
             <ion-title>Privacy</ion-title>
         </ion-toolbar>
     </ion-header>

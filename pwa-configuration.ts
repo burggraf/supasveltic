@@ -71,6 +71,10 @@ const ionicSvelteDirectories = [
 ]
 
 const pwaConfiguration = {
+    filename: 'sw.js',
+    workbox: { 
+        swDest: "sw.js"
+    },  
     srcDir: './build',
     outDir: './build', // to ensure sw.js and workbox are in build - not according to docs, but works nevertheless? 
     includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png', '/*', ...ionicSvelteDirectories],

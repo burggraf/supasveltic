@@ -18,6 +18,7 @@ const config = {
 			serviceWorker: generateSW ? undefined : 'src/prompt-sw.ts',
 		},
 		alias: {
+			'$lib': 'src/lib',
 			'$ionic': 'src/lib/ionic',
 			'$ionpage': 'src/lib/ionic/svelte/components/IonPage.svelte',
 			'$interfaces': 'src/interfaces',

@@ -1,7 +1,7 @@
-
-import { supabase } from '$services/supabase.service'
 import { currentUser } from '$services/supabase.auth.service'
+import { supabase } from '$services/supabase.service'
 import { writable } from 'svelte/store';
+
 let user: any = {};
 let _currentState: any = {};
 interface CurrentState {

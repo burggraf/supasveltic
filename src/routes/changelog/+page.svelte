@@ -1,6 +1,8 @@
 <script lang="ts">
+    import { IonPage } from "ionic-svelte"
 	import { goto } from '$app/navigation';
 </script>
+<IonPage>
 <ion-header>
 	<ion-toolbar color="primary">
 		<ion-buttons slot="start">
@@ -18,7 +20,7 @@
     </ul>
 </div>
 </ion-content>
-
+</IonPage>
 <style>
     .inner-div {
         margin:40px;

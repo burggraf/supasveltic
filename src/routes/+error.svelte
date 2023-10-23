@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { IonPage } from "ionic-svelte"
 	import { goto } from '$app/navigation';
 	import { currentUser } from '$services/supabase.auth.service';
 	import * as allIonicIcons from 'ionicons/icons';
@@ -6,6 +7,7 @@
     pushPathStack();
 	// goto('/components/Splash');
 </script>
+<IonPage>
 <ion-header>
 	<ion-toolbar color="primary">
 		<ion-buttons slot="start">
@@ -32,7 +34,7 @@
  
 </div>
 </ion-content>
-
+</IonPage>
 <style>
     .inner-div {
         margin:40px;

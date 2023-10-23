@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { IonPage } from "ionic-svelte"
+
 	import { currentUser } from '$services/supabase.auth.service';
 	import { goto } from '$app/navigation';
 	import * as allIonicIcons from 'ionicons/icons';
@@ -12,6 +14,8 @@
 	export let providers: Provider[] = [];
 	export let onSignIn: Function = () => {};
 
+	const app_version = __APP_VERSION__;
+	const app_name = __APP_NAME__;
 
 	onMount(() => {
 		return () => {}
@@ -31,7 +35,7 @@
 		await openLoginModalController.present();
 	};
 </script>
-
+<IonPage>
 <ion-header>
 	{#if $currentUser}
 		<ion-toolbar color="primary">
@@ -65,28 +69,21 @@
 <ion-footer>
 	{#if !$currentUser}
 		<ion-toolbar color="transparent" class="ion-text-center">
+			<b>{app_name} {app_version}</b><br/>
 			<span
 				on:click={() => {
 					goto("/terms");
 				}}
 				class="pointer">Terms of Service</span
 			>
-			<ion-icon
-				icon={allIonicIcons.ellipseSharp}
-				size="small"
-				class="padded"
-			/>
+			<span>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</span>
 			<span
 				on:click={() => {
 					goto("/privacy");
 				}}
 				class="pointer">Privacy</span
 			>
-			<ion-icon
-				icon={allIonicIcons.ellipseSharp}
-				size="small"
-				class="padded"
-			/>
+			<span>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</span>
 			<span
 				on:click={() => {
 					goto("/support");
@@ -96,7 +93,7 @@
 		</ion-toolbar>
 	{/if}
 </ion-footer>
-
+</IonPage>
 <style>
 	.padded {
 		padding-left: 5px;

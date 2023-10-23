@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { IonPage } from "ionic-svelte"
-
-
 </script>
 <IonPage>
-
     <ion-header>
         <ion-toolbar>
             <ion-buttons slot="start">

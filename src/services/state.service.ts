@@ -5,13 +5,7 @@ import { writable } from 'svelte/store';
 let user: any = {};
 let _currentState: any = {};
 interface CurrentState {
-    propertyMap?: {
-        lat: number;
-        lng: number;
-        zoom: number;
-    },
-    propertyFilter?: any;
-    unreadMessageCount?: number;
+    selectedMenuItem?: string;
 }
 
 export let currentState: any = writable<CurrentState>({});

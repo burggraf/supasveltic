@@ -1,18 +1,18 @@
 <script lang="ts">
     import { onMount, afterUpdate } from "svelte";
     import { goto } from '$app/navigation'
-
+    import { page } from '$app/stores'
     export let appPages: any;
     export let badges: any;
     import * as allIonicIcons from 'ionicons/icons'
     import { menuController } from "@ionic/core";
+    import { currentState } from '$services/state.service';
 
     let selectedAccordionItem = localStorage.getItem("selectedAccordionItem") || "";
     let selectedAccordion = localStorage.getItem("selectedAccordion") || "";
     let menuContent: any = [];
   
     function clickHandler(e: any, url: string) {
-        // console.log('url', url)
         localStorage.setItem("selectedPage", url);
         document.getElementById(selectedAccordionItem)?.classList.remove("selected");
         if (e.target.id) {
@@ -58,40 +58,75 @@
     afterUpdate(() => {
       menuContent = renderMenuItems(appPages);
     });
-  
-    onMount(() => {
-      menuContent = renderMenuItems(appPages);
-      setTimeout(() => {
-        let targetItem = '/'; // need to get startup route here
-        appPages.map((appPage: any, index: number) => {
+    const setSelectedItem = (targetItem: string) => {
+      let oldItem = '';
+      let newItem = '';
+      if ($currentState.selectedMenuItem) {
+        oldItem = $currentState.selectedMenuItem;
+      } 
+      currentState.set({selectedMenuItem: targetItem});
+      newItem = targetItem;
+      appPages.map((appPage: any, index: number) => {
           if (appPage.children) {
             appPage.children.map((appChild: any, index: number) => {
-              document
-                .getElementById(appChild.url)
-                ?.parentElement?.parentElement?.classList.add(
-                  "accordion-collapsed"
-                );
-              document
-                .getElementById(appChild.url)
-                ?.parentElement?.parentElement?.classList.remove(
-                  "accordion-expanded"
-                );
-              if (appChild.url === targetItem) {
-                const acc = document.getElementById(appChild.url)?.parentElement
-                  ?.parentElement;
-                if (acc) {
-                  setTimeout(() => {
-                    acc.classList.remove("accordion-collapsed");
-                    acc.classList.add("accordion-expanded");
-                    document.getElementById(appChild.url)?.click();
-                  }, 0);
-                  return;
+              // looping all children here
+              if (appChild.url === oldItem) {
+                const el = document.getElementById(appChild.url)!;
+                if (el) { 
+                  el.classList.remove("selected");
+                  el.style.color = "var(--ion-color-dark)";
                 }
+                document
+                  .getElementById(appChild.url)?.parentElement?.parentElement?.classList.add(
+                    "accordion-collapsed"
+                  );
+                document
+                  .getElementById(appChild.url)?.parentElement?.parentElement?.classList.remove(
+                    "accordion-expanded"
+                  );
               }
             });
           }
         });
-      }, 0);
+      appPages.map((appPage: any, index: number) => {
+        if (appPage.children) {
+          appPage.children.map((appChild: any, index: number) => {
+            // looping all children here
+            if (appChild.url === newItem) {
+              const el = document.getElementById(appChild.url)!;
+              if (el) { 
+                el.classList.remove("selected");
+                el.classList.add("selected");
+                el.style.color = "var(--ion-color-primary)";
+              }
+              document
+                .getElementById(newItem)?.parentElement?.parentElement?.parentElement?.classList.add(
+                  "accordion-expanded"
+                );
+              document
+                .getElementById(newItem)?.parentElement?.parentElement?.parentElement?.classList.remove(
+                  "accordion-collapsed"
+                );
+            }
+          });
+        }
+      });
+
+    };
+    onMount(() => {
+      page.subscribe((value: any) => {
+        if (value) {
+          const route = value.route.id;
+          setTimeout(() => {
+            setSelectedItem(route.substring(1));
+          }, 500);
+        }
+      });
+      menuContent = renderMenuItems(appPages);
+      setTimeout(() => {
+        let targetItem = $currentState.selectedMenuItem || 'welcome'; // need to get startup route here
+        setSelectedItem(targetItem);
+      }, 500);
     });
   </script>
     
@@ -192,6 +227,19 @@ ion-menu.md ion-item {
   border-radius: 4px;
 }
 
+/* selected menu item here */
+ion-item.selected {
+  /* --background: rgba(var(--ion-color-primary-rgb), 0.14); */
+  --background: red !important;
+  color: var(--ion-color-primary) !important;
+  --color: var(--ion-color-primary) !important;
+
+  --border-color: green;
+  --border-style: dashed;
+  --border-width: 2px;
+}
+
+
 ion-menu.md ion-item.selected {
   --background: rgba(var(--ion-color-primary-rgb), 0.14);
 }
@@ -256,8 +304,5 @@ ion-note {
   color: var(--ion-color-medium-shade);
 }
 
-ion-item.selected {
-  --color: var(--ion-color-primary);
-}
 
 </style>

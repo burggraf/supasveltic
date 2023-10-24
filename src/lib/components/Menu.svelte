@@ -56,7 +56,7 @@
 	const appPages: AppPage[] = [
 		{
 			title: 'Dashboard',
-			url: 'dashboard',
+			url: 'dashboardMenu',
 			icon: 'barChart',
 			children: [
 				{ title: 'Welcome', url: 'welcome', icon: 'map', disabled: false },
@@ -64,7 +64,7 @@
 		},
 		{
 			title: 'Help & Information',
-			url: 'information',
+			url: 'informationMenu',
 			icon: 'informationCircle',
 			children: [
 				{ title: 'About...', url: 'about', icon: 'map', disabled: false },
@@ -75,7 +75,7 @@
 		},
 		{
 			title: 'Settings & Profile',
-			url: 'settings',
+			url: 'settingsMenu',
 			icon: 'settings',
 			children: [
 				{ title: 'Account', url: 'account', icon: 'settings', disabled: false },
@@ -84,7 +84,7 @@
 		},
 		{
 			title: 'Admin',
-			url: 'admin',
+			url: 'adminMenu',
 			icon: 'lockClosed',
 			children: [
 				{ title: 'Users', url: 'adm-users', icon: 'map', disabled: true },

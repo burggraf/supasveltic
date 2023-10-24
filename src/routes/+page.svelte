@@ -19,7 +19,6 @@
 	const app_name = __APP_NAME__;
 
 	onMount(() => {
-		console.log('$currentState.selectedMenuItem', $currentState.selectedMenuItem);
 		if ($currentState.selectedMenuItem) {
 			goto($currentState.selectedMenuItem);
 		}

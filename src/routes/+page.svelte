@@ -10,6 +10,7 @@
 	import { supabase } from '$services/supabase.service';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte'
+	import { currentState } from "$services/state.service";
 
 	export let providers: Provider[] = [];
 	export let onSignIn: Function = () => {};
@@ -18,6 +19,10 @@
 	const app_name = __APP_NAME__;
 
 	onMount(() => {
+		console.log('$currentState.selectedMenuItem', $currentState.selectedMenuItem);
+		if ($currentState.selectedMenuItem) {
+			goto($currentState.selectedMenuItem);
+		}
 		return () => {}
 	});
 

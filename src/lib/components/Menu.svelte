@@ -78,6 +78,7 @@
 			url: 'settings',
 			icon: 'settings',
 			children: [
+				{ title: 'Account', url: 'account', icon: 'settings', disabled: false },
 				{ title: 'Settings', url: 'settings', icon: 'settings', disabled: false },
 			],
 		},
@@ -173,6 +174,7 @@
 					}}
 					profileFunction={() => {
 						//console.log('do some profileFunction here')
+						goto('/account');
 					}}
 				/>
 			</ion-menu-toggle>

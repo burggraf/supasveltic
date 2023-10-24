@@ -44,7 +44,7 @@
 		icon?: string
 		iosIcon?: string
 		mdIcon?: string
-		children: AppChild[]
+		children?: AppChild[]
 	}
 	interface AppChild {
 		title: string

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
-	import { page } from '$app/stores'
+	// import { page } from '$app/stores'
 	import { currentUser } from '$services/supabase.auth.service'
 	import Login from '$components/Login.svelte'
 
@@ -16,18 +16,17 @@
 	import IOSInstall from '$lib/components/IOSInstall.svelte'
 
 	let hideMenu = true // a hack because the menu shows before the splash (in Chrome on Windows)
-	export let side = 'start'
 	import { showConfirm } from '$services/alert.service'
 
 	// ** get package info
 	const app_version = __APP_VERSION__
 	const app_name = __APP_NAME__
-	const app_homepage = __APP_HOMEPAGE__
-	const app_description = __APP_DESCRIPTION__
+	// const app_homepage = __APP_HOMEPAGE__
+	// const app_description = __APP_DESCRIPTION__
 	const app_menu_title = __APP_MENU_TITLE__
 	const app_menu_subtitle = __APP_MENU_SUBTITLE__
-	const app_theme_color = __APP_THEME_COLOR__
-	const app_background_color = __APP_BACKGROUND_COLOR__
+	// const app_theme_color = __APP_THEME_COLOR__
+	// const app_background_color = __APP_BACKGROUND_COLOR__
 	// *******************
 
 	import { toast } from '$services/toast'
@@ -35,6 +34,7 @@
 
 	onMount(() => {
 		// this is unfortunately needed in order to have the menuController API function properly
+		// without this, clicking on the icon at the top left does not close the menu
 		registerMenu('mainmenu')
 	})
 
@@ -53,7 +53,7 @@
 		disabled?: boolean
 	}
 
-	const adminPages: AppPage[] = [
+	const appPages: AppPage[] = [
 		{
 			title: 'Dashboard',
 			url: 'dashboard',
@@ -90,12 +90,8 @@
 			],
 		},
 	]
-	const sidemenu: any = null;
-	const badges: any = {};
 
-	const appPages: Array<{ title: string, url: string; requireLogin: boolean; icon: any }> = [
-		{ title: 'Start', url: '/', icon: allIonicIcons.informationCircleOutline, requireLogin: false },
-	]
+	const badges: any = {};
 
 	const closeAndNavigate = async (url: string) => {
 		goto(url)
@@ -150,20 +146,7 @@
 			}
 		}
 	}
-	const toggleSyncTime = () => {
-		const el = document.getElementById('syncTime')
-		if (el) {
-			if (el.classList.contains('hidden')) {
-				el.classList.remove('hidden')
-			} else {
-				el.classList.add('hidden')
-			}
-		}
-	}
 </script>
-
-
-<!-- <ion-menu {side} content-id="main" menu-id="mainmenu" class:menuhide={hideMenu}> -->
 
 <ion-menu content-id="main" menu-id="mainmenu" class:menuhide={hideMenu}>
 	<ion-header>
@@ -195,7 +178,7 @@
 			</ion-menu-toggle>
 		</div>
 
-		<AccordionMenu appPages={adminPages} menuRef={sidemenu} {badges} />
+		<AccordionMenu appPages={appPages} {badges} />
 
 		<ion-list>
 			<ion-item lines="none" />

@@ -3,7 +3,6 @@
     import { goto } from '$app/navigation'
 
     export let appPages: any;
-    export let menuRef: any;
     export let badges: any;
     import * as allIonicIcons from 'ionicons/icons'
     import { menuController } from "@ionic/core";
@@ -107,12 +106,10 @@
         slot="content"
         class="appPageChildList">
         {#each menu.children as child (child.index)}
-          <ion-menu-toggle autoHide={false} key={"AppChild" + child.index}>
+          <ion-menu-toggle>
             <ion-item
               id={child.url}
               on:click={(e) => {clickHandler(e, "/" + child.url)}}
-              data={"/" + child.url}
-              routerLink={"/" + child.url}
               lines="none"
               detail={false}
               class="appPageChildItem"

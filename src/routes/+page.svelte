@@ -19,7 +19,7 @@
 	const app_name = __APP_NAME__;
 
 	onMount(() => {
-		if ($currentState.selectedMenuItem) {
+		if ($currentUser && $currentState.selectedMenuItem) {
 			goto($currentState.selectedMenuItem);
 		}
 		return () => {}

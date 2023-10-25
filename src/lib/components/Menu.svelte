@@ -90,6 +90,11 @@
 				{ title: 'Users', url: 'adm-users', icon: 'map', disabled: true },
 			],
 		},
+		{
+			title: 'Samples',
+			url: 'samples',
+			icon: 'starOutline',
+		},
 	]
 
 	const badges: any = {};

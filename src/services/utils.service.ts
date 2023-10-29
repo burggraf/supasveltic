@@ -1,4 +1,4 @@
-// import { goto } from '$app/navigation';
+// import { modalController } from '$app/navigation';
 // import { showConfirm } from '$services/alert.service';
 import { modalController } from '$ionic/svelte'
 
@@ -27,6 +27,20 @@ export const openModal = async (theModal: any, theProps: any = {}, theOptions: a
   const openLoginModalController = await modalController.create(obj)
 
   openLoginModalController.present();
+  setTimeout(() => {resizeModal(openLoginModalController)}, 200);
   const { data } = await openLoginModalController.onWillDismiss();
   return data;
+}
+
+export const resizeModal = async (openLoginModalController: HTMLIonModalElement) => {
+  setTimeout(() => {
+    const pg = openLoginModalController.getElementsByClassName('ion-page')[0];
+    const header = pg.getElementsByTagName('ion-header')[0];
+    const content = pg.getElementsByTagName('ion-content')[0];
+    const footer = pg.getElementsByTagName('ion-footer')[0];
+    let p = pg.clientHeight;
+    if (header) p -= header.clientHeight;
+    if (footer) p -= footer.clientHeight;
+    content.style.height = p + 'px';
+  }, 200);
 }

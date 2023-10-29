@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { IonPage } from 'ionic-svelte'
 	import { dropdownmenu } from '$components/DropdownMenu'
+	import sampleModal from './sample-modal/+page.svelte'
+	import { openModal } from '$services/utils.service'
 	import * as allIonicIcons from 'ionicons/icons'
 
 	import { toast } from '$services/toast'
@@ -128,7 +130,10 @@
 						],
 					})
 				}}><ion-label>alert / choices</ion-label></ion-item
-			>			
+			>	
+			<ion-item on:click={()=>{
+				openModal(sampleModal, { title: 'I popped up!' })
+			}}>Sample Modal</ion-item>		
 		</ion-list>
 	</ion-content>
 </IonPage>

@@ -44,3 +44,7 @@ export const resizeModal = async (openLoginModalController: HTMLIonModalElement)
     content.style.height = p + 'px';
   }, 200);
 }
+
+export const isModal = async () => {
+  return (await modalController.getTop() !== undefined);
+}

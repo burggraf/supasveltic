@@ -117,10 +117,10 @@
         {
           text: "OK",
           handler: () => {
-            if (obj.okHander) {
-                obj.okHander();
-            } else {
-                // console.log("okHandler was not found...not doing anything");
+            if (obj.okHandler) {
+                obj.okHandler();
+            } else if (obj.onOk) {
+                obj.onOk();
             }
           },
         },

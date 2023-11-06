@@ -48,3 +48,21 @@ export const resizeModal = async (openLoginModalController: HTMLIonModalElement)
 export const isModal = async () => {
   return (await modalController.getTop() !== undefined);
 }
+
+// get a file from the web and store it in a variable as a byte array
+export const get_byte_array = async (url: string, length: number = 500) => {
+  const response = await fetch(url);
+  const t = await response.text();
+  const arr = [];
+  for (let i = 0; i < t.length; i++) {
+      const a = t.charCodeAt(i);
+      if (a > 0 && a < 256) arr.push(a);
+      if (arr.length >= length) break;
+  }
+  if (arr.length < length) {
+      for (let i = 0; i < length - arr.length; i++) {
+          arr.push(arr[i]);
+      }
+  }
+  return arr;
+}

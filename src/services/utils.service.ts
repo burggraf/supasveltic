@@ -49,3 +49,20 @@ export const isModal = async () => {
   return (await modalController.getTop() !== undefined);
 }
 
+export const decrypt_item = (index: number) => {
+  const COMPOSITE = import.meta.env.VITE_SUPABASE
+  let RAND = ''
+  let result = ''
+  let encrypted_string = ''
+  for (let i=0; i<512; i+=2) {
+      RAND += String.fromCharCode(parseInt(COMPOSITE.substring(i, i+2), 16));
+  }
+  const encrypted = COMPOSITE.substring(512).split('FF')[index];
+  for (let i=0; i<encrypted.length; i+=2) {
+      encrypted_string += String.fromCharCode(parseInt(encrypted.substring(i, i+2), 16));
+  }
+  for (let i=0; i<encrypted_string.length; i++) {    
+      result += String.fromCharCode(encrypted_string.charCodeAt(i) ^ RAND.charCodeAt(i));
+  }
+  return result;
+}

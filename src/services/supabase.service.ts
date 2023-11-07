@@ -1,11 +1,8 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '../models/schema';
-import { get_byte_array } from './utils.service';
 const VITE_SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL
 const VITE_SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY
 export const supabase: SupabaseClient<Database> = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_KEY);
-
-get_byte_array('/favicon.ico')
 
 // export const add_item_to_list = async (name: string, type: string, item: any) => {
 //     let id: string = '';

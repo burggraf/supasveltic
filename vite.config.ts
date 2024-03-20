@@ -1,4 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+
 import type { UserConfig } from 'vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -118,10 +119,12 @@ const config: UserConfig = {
 					],
 				},
 				injectManifest: {
-					globPatterns: ['client/**/*.{js,css,ico,png,svg,webp,woff,woff2}']
+					globPatterns: ['client/**/*.{js,css,ico,png,svg,webp,woff,woff2}'],
+					debug: false
 				},
 				workbox: {
-					globPatterns: ['client/**/*.{js,css,ico,png,svg,webp,woff,woff2}']
+					globPatterns: ['client/**/*.{js,css,ico,png,svg,webp,woff,woff2}'],
+					debug: false
 				},
 				devOptions: {
 					enabled: true,

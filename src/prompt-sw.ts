@@ -7,6 +7,9 @@ import { NavigationRoute, registerRoute } from 'workbox-routing'
 
 declare let self: ServiceWorkerGlobalScope
 
+// supporess workbox logs below:
+self.__WB_DISABLE_DEV_LOGS = true
+
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING')
     self.skipWaiting()
